@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8868551240065024458}
   - component: {fileID: 8770398960289432814}
   - component: {fileID: 7354433059948273598}
+  - component: {fileID: -6609259738451814038}
   m_Layer: 0
   m_Name: Projectile 1
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1e25899e392542d44b2cad4c70f6cd2b, type: 3}
-  m_Color: {r: 0.33962262, g: 0.21572235, b: 0.20986114, a: 1}
+  m_Color: {r: 0.15217312, g: 0.990566, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,3 +103,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6609259738451814038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721747822736071711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76045e0d42834854491a33298ee5439e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
