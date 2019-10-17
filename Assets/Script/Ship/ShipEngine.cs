@@ -26,7 +26,10 @@ public class ShipEngine : MonoBehaviour
         }
 
         lastThrust = shipInput.vertical;
+    }
 
+    void FixedUpdate()
+    {
         transform.position += shipInput.vertical * speed * transform.up * Time.deltaTime;
         transform.Rotate(-shipInput.horizontal * turnSpeed * transform.forward * Time.deltaTime);
     }
