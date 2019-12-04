@@ -7,12 +7,15 @@ public class Graph : MonoBehaviour
     [SerializeField] private GameObject room;
     [SerializeField] private GameObject corridor;
     [SerializeField] private int numberOfRooms = 10;
+    [SerializeField] private int spaceBeetwen = 10;
     private Queue<Node> roomToMake = new Queue<Node>();
+    private int _gridX;
+    private int _gridY;
     private Node[,] nodeGrid; 
     void Start()
     {
-        int _gridX = numberOfRooms + 4;
-        int _gridY = numberOfRooms + 4;
+        _gridX = numberOfRooms + 4;
+        _gridY = numberOfRooms + 4;
         int roomsCreated = 0;
         nodeGrid = new Node[_gridX, _gridY];
         nodeGrid[_gridX/2, _gridY/2] =  new Node(_gridX/2, _gridY/2, Direction.none);
@@ -22,10 +25,14 @@ public class Graph : MonoBehaviour
         {
             var currentRoom = roomToMake.Dequeue();
             currentRoom.Initalized = true;
-            Instantiate(room, new Vector2(currentRoom.X, currentRoom.Y), Quaternion.identity);
+            Instantiate(room, new Vector2
+                        ((currentRoom.X - _gridX/2) * room.transform.lossyScale.x + (currentRoom.X - _gridX/2) * spaceBeetwen, 
+                        (currentRoom.Y - _gridY/2) * room.transform.lossyScale.y + (currentRoom.Y - _gridY/2) * spaceBeetwen), 
+                        Quaternion.identity);
             CheckNeighbours(currentRoom);
             roomsCreated++;
         }
+
         for(int x = 0; x < _gridX; x++)
         {
             for(int y = 0; y < _gridY; y++)
@@ -81,19 +88,31 @@ public class Graph : MonoBehaviour
             {
                 if (neighbourNode.DirNeighbour == Direction.North)
                 {
-                    Instantiate(corridor, new Vector2(node.X + 0.5f, node.Y), Quaternion.Euler(0,0,0));
+                    Instantiate(corridor, new Vector2(
+                        (node.X - _gridX/2) * room.transform.lossyScale.x + (node.X - _gridX/2) * spaceBeetwen + 30, 
+                        (node.Y - _gridY/2) * room.transform.lossyScale.y + (node.Y - _gridY/2) * spaceBeetwen), 
+                        Quaternion.Euler(0,0,0));
                 }
                 else if (neighbourNode.DirNeighbour == Direction.South)
                 {
-                    Instantiate(corridor, new Vector2(node.X - 0.5f, node.Y), Quaternion.Euler(0,0,0));
+                    Instantiate(corridor, new Vector2(
+                        (node.X - _gridX/2) * room.transform.lossyScale.x + (node.X - _gridX/2) * spaceBeetwen - 30, 
+                        (node.Y - _gridY/2) * room.transform.lossyScale.y + (node.Y - _gridY/2) * spaceBeetwen), 
+                        Quaternion.Euler(0,0,0));
                 }
                 else if (neighbourNode.DirNeighbour == Direction.East)
                 {
-                    Instantiate(corridor, new Vector2(node.X, node.Y + 0.5f), Quaternion.Euler(0,0,90));
+                    Instantiate(corridor, new Vector2(
+                        (node.X - _gridX/2) * room.transform.lossyScale.x + (node.X - _gridX/2) * spaceBeetwen, 
+                        (node.Y - _gridY/2) * room.transform.lossyScale.y + (node.Y - _gridY/2) * spaceBeetwen + 30), 
+                        Quaternion.Euler(0,0,90));
                 }
                 else if (neighbourNode.DirNeighbour == Direction.West)
                 {
-                    Instantiate(corridor, new Vector2(node.X, node.Y - 0.5f), Quaternion.Euler(0,0,90));
+                    Instantiate(corridor, new Vector2(
+                        (node.X - _gridX/2) * room.transform.lossyScale.x + (node.X - _gridX/2) * spaceBeetwen, 
+                        (node.Y - _gridY/2) * room.transform.lossyScale.y + (node.Y - _gridY/2) * spaceBeetwen - 30), 
+                        Quaternion.Euler(0,0,90));
                 }
             }
         }
